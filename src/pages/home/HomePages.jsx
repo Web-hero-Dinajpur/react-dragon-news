@@ -7,7 +7,7 @@ import Rightsid from "../../Shared/Rightside/Rightsid";
 
 const HomePages= () => {
     return (
-        <div>
+        <div className="">
             <Headers></Headers>
             <Navbar></Navbar>
             <MainNavbar></MainNavbar>

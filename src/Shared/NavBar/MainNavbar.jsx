@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import userImg from "../../assets/user.png"
+import { AuthContext } from '../../provider/AuthProvider';
 
 const MainNavbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleSignOut = () =>{
+        logOut()
+        .then()
+        .catch()
+    }
 
     const Navbar = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/about">About</NavLink></li>
         <li><NavLink to="/career">Career</NavLink></li>
+        <li><NavLink to="/login">Login</NavLink></li>
+        <li><NavLink to="/register">Register</NavLink></li>
     </>
     return (
         <div>
@@ -40,22 +51,29 @@ const MainNavbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-   
 
-                        <div className="dropdown dropdown-end">
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <img
-                                        alt="Tailwind CSS Navbar component"
-                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                                </div>
+
+                    <div className="dropdown dropdown-end">
+                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <img
+                                    alt="Tailwind CSS Navbar component"
+                                    src={userImg} />
                             </div>
                         </div>
+                    </div>
 
-         
-                    <Link>
-                        <button className='btn'>Login</button>
-                    </Link>
+                    {
+                        user ?
+                            <button onClick={handleSignOut} className='btn'>Sign Out</button>
+                            :
+                            <Link to='/login'>
+                                <button className='btn'>Login</button>
+                            </Link>
+                    }
+
+
+
                 </div>
             </div>
         </div>
